@@ -22,4 +22,13 @@ public class QuizAppController {
         Quiz quiz  = new Quiz(question, answer);
         quizzes.add(quiz);
     }
+    @GetMapping("/check")
+    public String check(String question, boolean answer) {
+        for (Quiz quiz: quizzes) {
+            if (quiz.getQuestion().equals(question)) {
+                return "Found : " + quiz.getQuestion();
+            }
+        }
+        return  "Not Found";
+    }
 }
