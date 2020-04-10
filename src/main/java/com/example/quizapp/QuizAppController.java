@@ -5,12 +5,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class QuizAppController {
     private List<Quiz> quizzes = new ArrayList<>();
+    private  QuizFileDao quizFileDao = new QuizFileDao();
 
     @GetMapping("/show")
     public List<Quiz> show() {
@@ -34,5 +36,15 @@ public class QuizAppController {
             }
         }
         return  "Not Found";
+    }
+    @PostMapping
+    public String save() {
+        try {
+            quizFileDao.write(quizzes);
+            return "OK!";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failer";
+        }
     }
 }
