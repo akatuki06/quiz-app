@@ -26,7 +26,11 @@ public class QuizAppController {
     public String check(String question, boolean answer) {
         for (Quiz quiz: quizzes) {
             if (quiz.getQuestion().equals(question)) {
-                return "Found : " + quiz.getQuestion();
+                if (quiz.isAnswer() == answer) {
+                    return "正解";
+                } else {
+                    return "不正解";
+                }
             }
         }
         return  "Not Found";
