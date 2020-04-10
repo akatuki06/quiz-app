@@ -31,4 +31,11 @@ public class Quiz {
         return question + " " + marubatsu;
     }
 
+    public static Quiz fromStoring(String line) {
+        String question = line.substring(0, line.length() - 2);
+        boolean answer = line.endsWith("○");
+
+        return new Quiz(question, answer);
+    }
+
 }

@@ -18,4 +18,22 @@ public class QuizTest {
         Quiz quiz = new Quiz("問題文", false);
         assertThat(quiz.toString(), is("問題文 ×"));
     }
+
+    @Test
+    public void fromStringWhenMaru() {
+        String line = "問題文1 ○";
+        Quiz quiz = Quiz.fromStoring(line);
+
+        assertThat(quiz.getQuestion(), is("問題文1"));
+        assertThat(quiz.isAnswer(), is(true));
+    }
+
+    @Test
+    public void fromStringWhenBatsu() {
+        String line = "問題文1 ×";
+        Quiz quiz = Quiz.fromStoring(line);
+
+        assertThat(quiz.getQuestion(), is("問題文1"));
+        assertThat(quiz.isAnswer(), is(false));
+    }
 }
